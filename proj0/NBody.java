@@ -28,7 +28,33 @@ public class NBody {
         return planets;
     }
 
-    public static void main(){
+    public static void main(String args[]){
+        double T=Double.parseDouble(args[0]);
+        double dt=Double.parseDouble(args[1]);
+        String filename=args[2];
+        double radius=NBody.readRadius(filename);
+        Planet[] planets=NBody.readPlanets(filename);
+        int n=planets.length;
+        StdDraw.enableDoubleBuffering();
+        for(double i=0;i<=T;i+=dt)
+        {
+            double[] xForces = new double[n];
+            double[] yForces = new double[n];
+            for(int j=0;j<n;j++)
+            {
+                xForces[j]=yForces[j]=0;
+                for(int k=0;k<n;k++)
+                {
+                    if(j==k)continue;
+                    xForces[j] += planets[j].calcForceExertedByX(planets[k]);
+                    yForces[j] += planets[j].calcForceExertedByY(planets[k]);
+                }
+            }
+            for(int j=0;j<n;j++)
+            {
+                planets[j].update(dt,xForces[j],yForces[j]);
+            }
+        }
 
     }
 
