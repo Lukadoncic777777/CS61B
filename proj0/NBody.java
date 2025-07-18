@@ -62,12 +62,11 @@ public class NBody {
             StdDraw.show();
             StdDraw.pause(10);
         }
-        System.out.println(radius);
         System.out.println(n);
+        System.out.println(radius);
         for(int i=0;i<n;i++){
             System.out.println(planets[i].xxPos+" "+planets[i].yyPos+" "+planets[i].xxVel+" "+planets[i].yyVel+" "+planets[i].mass+" "+planets[i].imgFileName);
         }
-
     }
 
 }
