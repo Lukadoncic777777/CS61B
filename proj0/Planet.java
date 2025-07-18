@@ -51,4 +51,8 @@ public class Planet {
         xxVel+=dt*fX/mass;
         yyVel+=dt*fY/mass;
     }
+    public void draw(){
+        StdDraw.picture(xxPos, yyPos, "images/" + imgFileName);
+    }
+
 }

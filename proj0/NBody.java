@@ -36,6 +36,7 @@ public class NBody {
         Planet[] planets=NBody.readPlanets(filename);
         int n=planets.length;
         StdDraw.enableDoubleBuffering();
+        StdDraw.setScale(-radius, radius);
         for(double i=0;i<=T;i+=dt)
         {
             double[] xForces = new double[n];
@@ -54,6 +55,19 @@ public class NBody {
             {
                 planets[j].update(dt,xForces[j],yForces[j]);
             }
+            StdDraw.picture(0, 0, "images/starfield.jpg");
+            for (Planet planet:planets) {
+                planet.draw();
+            }
+            StdDraw.show();
+            StdDraw.pause(10);
+//            for(int j=0;j<n;j++){
+//                System.out.println(planets[j].xxPos+" "+planets[j].yyPos+" "+planets[j].xxVel+" "+planets[j].yyVel+" "+planets[j].mass+" "+planets[j].imgFileName);
+//            }
+        }
+        System.out.println(radius);
+        for(int i=0;i<n;i++){
+            System.out.println(planets[i].xxPos+" "+planets[i].yyPos+" "+planets[i].xxVel+" "+planets[i].yyVel+" "+planets[i].mass+" "+planets[i].imgFileName);
         }
 
     }
