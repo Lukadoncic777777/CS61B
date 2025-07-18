@@ -37,8 +37,10 @@ public class NBody {
         int n=planets.length;
         StdDraw.enableDoubleBuffering();
         StdDraw.setScale(-radius, radius);
-        for(double i=0;i<=T;i+=dt)
+        System.out.println(T+" "+dt);
+        for(double i=0;i<T;i+=dt)
         {
+//            System.out.println(i);
             double[] xForces = new double[n];
             double[] yForces = new double[n];
             for(int j=0;j<n;j++)
