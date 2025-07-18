@@ -45,6 +45,21 @@ public class Planet {
         return F*dy/dis;
     }
 
+    public double calcNetForceExertedByX(Planet[] other){
+        double res=0;
+        for(Planet planet:other){
+            res+=this.calcForceExertedByX(planet);
+        }
+        return res;
+    }
+    public double calcNetForceExertedByY(Planet[] other){
+        double res=0;
+        for(Planet planet:other){
+            res+=this.calcForceExertedByY(planet);
+        }
+        return res;
+    }
+
     public void update(double dt, double fX,double fY){
         xxPos+=xxVel*dt+0.5*fX/mass*dt*dt;
         yyPos+=yyVel*dt+0.5*fY/mass*dt*dt;
