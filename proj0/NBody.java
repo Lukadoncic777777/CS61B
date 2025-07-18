@@ -28,7 +28,7 @@ public class NBody {
         return planets;
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         double T=Double.parseDouble(args[0]);
         double dt=Double.parseDouble(args[1]);
         String filename=args[2];
@@ -37,7 +37,13 @@ public class NBody {
         int n=planets.length;
         StdDraw.enableDoubleBuffering();
         StdDraw.setScale(-radius, radius);
+        StdDraw.clear();
         System.out.println(T+" "+dt);
+        StdDraw.picture(0, 0, "images/starfield.jpg");
+        for (Planet planet:planets) {
+            planet.draw();
+        }
+        StdDraw.show();
         for(double i=0;i<T;i+=dt)
         {
 //            System.out.println(i);
@@ -45,13 +51,8 @@ public class NBody {
             double[] yForces = new double[n];
             for(int j=0;j<n;j++)
             {
-                xForces[j]=yForces[j]=0;
-                for(int k=0;k<n;k++)
-                {
-                    if(j==k)continue;
-                    xForces[j] += planets[j].calcForceExertedByX(planets[k]);
-                    yForces[j] += planets[j].calcForceExertedByY(planets[k]);
-                }
+                xForces[j]=planets[j].calcNetForceExertedByX(planets);
+                yForces[j]=planets[j].calcNetForceExertedByY(planets);
             }
             for(int j=0;j<n;j++)
             {
