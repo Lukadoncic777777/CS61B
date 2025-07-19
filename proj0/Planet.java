@@ -1,97 +1,84 @@
+import static java.lang.Math.sqrt;
+
 public class Planet {
-    public double xxPos;
-    public double yyPos;
-    public double xxVel;
-    public double yyVel;
-    public double mass;
+    public double xxPos,yyPos,xxVel,yyVel,mass;
     public String imgFileName;
-
-    private static final double G = 6.67e-11;
-
-    public Planet(double xP, double yP, double xV, double yV, double m, String img) {
-        this.xxPos = xP;
-        this.yyPos = yP;
-        this.xxVel = xV;
-        this.yyVel = yV;
-        this.mass = m;
-        this.imgFileName = img;
+    private static final double G=6.67*1e-11;
+    public Planet(double xP,double yP,double xV,double yV,double ms,String img){
+        xxPos=xP;
+        yyPos=yP;
+        xxVel=xV;
+        yyVel=yV;
+        mass=ms;
+        imgFileName=img;
+    }
+    public Planet(Planet p){
+        this.xxPos=p.xxPos;
+        this.xxVel=p.xxVel;
+        this.yyVel=p.yyVel;
+        this.yyPos=p.yyPos;
+        this.mass=p.mass;
+        this.imgFileName=p.imgFileName;
     }
 
-    public Planet(Planet p) {
-        this.xxPos = p.xxPos;
-        this.yyPos = p.yyPos;
-        this.xxVel = p.xxVel;
-        this.yyVel = p.yyVel;
-        this.mass = p.mass;
-        this.imgFileName = p.imgFileName;
+    public double calcDistance(Planet p){
+        double dx=p.xxPos-xxPos,dy=p.yyPos-yyPos;
+        return sqrt(dx*dx+dy*dy);
     }
 
-    public double calcDistance(Planet p) {
-        double x1 = this.xxPos;
-        double y1 = this.yyPos;
-        double x2 = p.xxPos;
-        double y2 = p.yyPos;
-
-        double xAbs = Math.abs(x1 - x2);
-        double yAbs = Math.abs(y1 - y2);
-        return Math.sqrt((xAbs * xAbs) + (yAbs * yAbs));
+    public double calcForceExertedBy(Planet p){
+        double dis=this.calcDistance(p);
+        return G*mass*p.mass/(dis*dis);
     }
 
-    public double calcForceExertedBy(Planet p) {
-        double radiusSquare = this.calcDistance(p) * this.calcDistance(p);
-        return (G * this.mass * p.mass) / radiusSquare;
-    }
-
-    public double calcForceExertedByX(Planet p) {
-        double distanceX = p.xxPos - this.xxPos;
-        double force = this.calcForceExertedBy(p);
-        double radius = this.calcDistance(p);
-        return (force * distanceX) / radius;
-    }
-
-    public double calcForceExertedByY(Planet p) {
-        double distanceY = p.yyPos - this.yyPos;
-        double force = this.calcForceExertedBy(p);
-        double radius = this.calcDistance(p);
-        return (force * distanceY) / radius;
-    }
-
-    public double calcNetForceExertedByX(Planet[] planets) {
-        double sumForce = 0;
-        for (Planet p : planets) {
-            if (this.equals(p)) {
-                continue;
-            } else {
-                sumForce += this.calcForceExertedByX(p);
-            }
+    public double calcForceExertedByX(Planet p){
+        double dx=p.xxPos-xxPos;
+        double dis=this.calcDistance(p);
+        if(dis==0){
+            return 0;
         }
-        return sumForce;
+        double F=this.calcForceExertedBy(p);
+        return F*dx/dis;
     }
 
-    public double calcNetForceExertedByY(Planet[] planets) {
-        double sumForce = 0;
-        for (Planet p : planets) {
-            if (this.equals(p)) {
-                continue;
-            } else {
-                sumForce += this.calcForceExertedByY(p);
-            }
+    public double calcForceExertedByY(Planet p){
+        double dy=p.yyPos-yyPos;
+        double dis=this.calcDistance(p);
+        if(dis==0){
+            return 0;
         }
-        return sumForce;
+        double F=this.calcForceExertedBy(p);
+        return F*dy/dis;
     }
 
-    public void update(double dt, double fX, double fY) {
-        double accelerationX = fX / this.mass;
-        double accelerationY = fY / this.mass;
-
-        this.xxVel += dt * accelerationX;
-        this.yyVel += dt * accelerationY;
-
-        this.xxPos += dt * this.xxVel;
-        this.yyPos += dt * this.yyVel;
+    public double calcNetForceExertedByX(Planet[] other){
+        double res=0;
+        for(Planet planet:other){
+            res+=this.calcForceExertedByX(planet);
+        }
+        return res;
     }
+    public double calcNetForceExertedByY(Planet[] other){
+        double res=0;
+        for(Planet planet:other){
+            res+=this.calcForceExertedByY(planet);
+        }
+        return res;
+    }
+    private double calcNetForceExertedByXY(Planet[] other){
+        double fX=this.calcNetForceExertedByX(other);
+        double fY=this.calcNetForceExertedByY(other);
+        return sqrt(fX*fX+fY*fY);
+    }
+    public void update(double dt, double fX,double fY){
 
-    public void draw() {
+        xxVel+=dt*fX/mass;
+        yyVel+=dt*fY/mass;
+        xxPos+=xxVel*dt;
+        yyPos+=yyVel*dt;
+    }
+    public void draw(){
         StdDraw.picture(xxPos, yyPos, "images/" + imgFileName);
     }
+
 }
