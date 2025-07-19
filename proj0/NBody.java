@@ -38,7 +38,7 @@ public class NBody {
         StdDraw.enableDoubleBuffering();
         StdDraw.setScale(-radius, radius);
         StdDraw.clear();
-        System.out.println(T+" "+dt);
+//        System.out.println(T+" "+dt);
         StdDraw.picture(0, 0, "images/starfield.jpg");
         for (Planet planet:planets) {
             planet.draw();
