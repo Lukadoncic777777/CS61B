@@ -86,5 +86,31 @@ public class LinkedListDequeTest {
 		System.out.println("Running tests.\n");
 		addIsEmptySizeTest();
 		addRemoveTest();
+		myTest1();
+		myTest2();
 	}
-} 
+
+	public static void myTest1(){
+		System.out.println("Running myTest1.");
+		LinkedListDeque lld1=new LinkedListDeque();
+		boolean passed=true;
+		passed=passed && lld1.isEmpty();
+		lld1.addFirst(1);
+		passed=passed && ((int)lld1.removeLast()==1);
+		lld1.addFirst(3);
+		passed=passed && ((int)lld1.removeLast()==3);
+		printTestStatus(passed);
+	}
+	public static void myTest2(){
+		System.out.println("Running myTest2");
+		LinkedListDeque lld1=new LinkedListDeque<>();
+		boolean passed=true;
+		passed=passed && lld1.isEmpty();
+		passed=passed && lld1.isEmpty();
+		lld1.addLast(2);
+		passed=passed && ((int) lld1.removeFirst()==2);
+		lld1.addLast(4);
+		passed=passed&&((int) lld1.removeFirst()==4);
+		printTestStatus(passed);
+	}
+}

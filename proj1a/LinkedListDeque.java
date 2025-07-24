@@ -1,6 +1,6 @@
 class Node<T> {
-    Node<T> next,prev;
-    T value;
+    private Node<T> next,prev;
+    private T value;
 
     public Node(Node<T> prev,Node<T> next,T value){
         this.next=next;
@@ -14,6 +14,9 @@ class Node<T> {
 
     public Node<T> getPrev() {
         return prev;
+    }
+    public T getValue(){
+        return value;
     }
 
     public void setNext(Node<T> next){
@@ -67,7 +70,7 @@ public class LinkedListDeque<T> {
     public void printDeque(){
         Node<T> now=head;
         while(now!=null){
-            System.out.print(now.value);
+            System.out.print(now.getValue());
             now=now.getNext();
         }
         System.out.println("");
@@ -75,25 +78,31 @@ public class LinkedListDeque<T> {
 
     public T removeFirst(){
         assert size>0;
-        T res=head.value;
+        T res=head.getValue();
         head=head.getNext();
         size--;
+        if(size==0){
+            tail=null;
+        }
         return res;
     }
     public T removeLast(){
         assert size>0;
-        T res=tail.value;
+        T res=tail.getValue();
         tail=tail.getPrev();
         size--;
+        if(size==0){
+            head=null;
+        }
         return res;
     }
     public T get(int index){
         Node<T> now=head;
         for(int i=1;i<=index;i++)now=now.getNext();
-        return now.value;
+        return now.getValue();
     }
     private T doGetRecursive(Node<T> now,int index){
-        if(index==0||now==null)return now.value;
+        if(index==0||now==null)return now.getValue();
         return doGetRecursive(now.getNext(),index-1);
     }
     public T getRecursive(int index){
