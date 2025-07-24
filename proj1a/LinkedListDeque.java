@@ -98,7 +98,7 @@ public class LinkedListDeque<T> {
         T res=tail.getValue();
         tail=tail.getPrev();
         if(tail!=null) {
-            tail.setPrev(null);
+            tail.setNext(null);
         }
         size--;
         if(size==0){
@@ -120,12 +120,18 @@ public class LinkedListDeque<T> {
         return doGetRecursive(head,index);
     }
 //    public static void main(String[] args){
-//        LinkedListDeque deque=new LinkedListDeque();
-//        deque.addFirst(0);
-//        deque.addFirst(1);
-//        deque.addFirst(2);
-//        deque.addFirst(3);
-//        int res= (int) deque.removeLast();
-//        System.out.println(res);
+////        LinkedListDeque deque=new LinkedListDeque();
+////        deque.addFirst(0);
+////        deque.addFirst(1);
+////        deque.addFirst(2);
+////        deque.addFirst(3);
+////        int res= (int) deque.removeLast();
+////        System.out.println(res);
+//        Node<Integer> a=new Node<Integer>(null,null,123);
+////        System.out.println(a);
+//        Node<Integer> b=new Node<Integer>(a,null,1234);
+//        a.setNext(b);
+//        Node<Integer> c=b.getPrev();
+//        System.out.println("1234?"+(int)a.getNext().getValue());
 //    }
 }
