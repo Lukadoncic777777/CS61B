@@ -2,10 +2,10 @@ class Node<T> {
     Node<T> next,prev;
     T value;
 
-    public Node(Node<T> Prev,Node<T> Next,T Value){
-        next=Next;
-        prev=Prev;
-        value=Value;
+    public Node(Node<T> prev,Node<T> next,T value){
+        this.next=next;
+        this.prev=prev;
+        this.value=value;
     }
 
     public Node<T> getNext() {
@@ -16,11 +16,11 @@ class Node<T> {
         return prev;
     }
 
-    public void setNext(Node<T> Next){
-        this.next=Next;
+    public void setNext(Node<T> next){
+        this.next=next;
     }
-    public void setPrev(Node<T> Prev){
-        this.prev=Prev;
+    public void setPrev(Node<T> prev){
+        this.prev=prev;
     }
 
 }
@@ -38,6 +38,10 @@ public class LinkedListDeque<T> {
         if(head!=null){
             head.setPrev(newNode);
         }
+        else
+        {
+            tail=newNode;
+        }
         head=newNode;
         size+=1;
     }
@@ -46,6 +50,10 @@ public class LinkedListDeque<T> {
         Node<T> newNode=new Node<>(tail,null,item);
         if(tail!=null){
             tail.setNext(newNode);
+        }
+        else
+        {
+            head=newNode;
         }
         tail=newNode;
         size+=1;
@@ -91,4 +99,13 @@ public class LinkedListDeque<T> {
     public T getRecursive(int index){
         return doGetRecursive(head,index);
     }
+//    public static void main(String[] args){
+//        LinkedListDeque deque=new LinkedListDeque();
+//        deque.addFirst(0);
+//        deque.addFirst(1);
+//        deque.addFirst(2);
+//        deque.addFirst(3);
+//        int res= (int) deque.removeLast();
+//        System.out.println(res);
+//    }
 }
