@@ -79,7 +79,7 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst(){
-        assert size>0;
+        if(size==0)return null;
         T res=head.getValue();
         head=head.getNext();
         if(head!=null) {
@@ -93,11 +93,9 @@ public class LinkedListDeque<T> {
         return res;
     }
     public T removeLast(){
-        assert size>0;
+        if(size==0)return null;
 //        System.out.println("size="+size+" head=null?"+(boolean)(head==null)+" tail=null?"+(boolean)(tail==null));
         T res=tail.getValue();
-//        System.out.println("check:"+(int)head.getValue()+" "+(int)tail.getValue());
-
         tail=tail.getPrev();
         if(tail!=null) {
             tail.setPrev(null);
