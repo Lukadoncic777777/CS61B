@@ -88,6 +88,7 @@ public class LinkedListDequeTest {
 		addRemoveTest();
 		myTest1();
 		myTest2();
+		myTest3();
 	}
 
 	public static void myTest1(){
@@ -111,6 +112,24 @@ public class LinkedListDequeTest {
 		passed=passed && ((int) lld1.removeFirst()==2);
 		lld1.addLast(4);
 		passed=passed&&((int) lld1.removeFirst()==4);
+		printTestStatus(passed);
+	}
+
+	public static void myTest3(){
+		System.out.println("Running myTest3");
+		LinkedListDeque lld1=new LinkedListDeque<>();
+		boolean passed=true;
+		lld1.addFirst(1);
+		lld1.addLast(2);
+//		System.out.println("OK now!");
+		passed=passed && ((int) lld1.removeLast()==2);
+//		System.out.println("OK now!!");
+		passed=passed && ((int) lld1.removeFirst()==1);
+//		System.out.println("OK now!!");
+		lld1.addFirst(5);
+//		System.out.println("OK now!!");
+		passed=passed && ((int) lld1.removeLast()==5);
+//		System.out.println("OK now!!");
 		printTestStatus(passed);
 	}
 }

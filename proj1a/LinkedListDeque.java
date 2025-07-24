@@ -26,11 +26,16 @@ class Node<T> {
         this.prev=prev;
     }
 
+//    @Override
+//    public String toString() {
+////        return super.toString();
+//        return new String(prev.getValue()+value.toString()+" "+next.getValue());
+//    }
 }
 
 public class LinkedListDeque<T> {
-    int size;
-    Node<T> head,tail;
+    private int size;
+    private Node<T> head,tail;
     public LinkedListDeque(){
         head=tail=null;
         size=0;
@@ -38,11 +43,10 @@ public class LinkedListDeque<T> {
     }
     public void addFirst(T item){
         Node<T> newNode=new Node<>(null,head,item);
+//        System.out.println("!!!size="+size+" head=null?"+(boolean)(head==null)+" tail=null?"+(boolean)(tail==null));
         if(head!=null){
             head.setPrev(newNode);
-        }
-        else
-        {
+        } else {
             tail=newNode;
         }
         head=newNode;
@@ -53,9 +57,7 @@ public class LinkedListDeque<T> {
         Node<T> newNode=new Node<>(tail,null,item);
         if(tail!=null){
             tail.setNext(newNode);
-        }
-        else
-        {
+        } else {
             head=newNode;
         }
         tail=newNode;
@@ -80,19 +82,30 @@ public class LinkedListDeque<T> {
         assert size>0;
         T res=head.getValue();
         head=head.getNext();
+        if(head!=null) {
+            head.setPrev(null);
+        }
         size--;
         if(size==0){
             tail=null;
+            head=null;
         }
         return res;
     }
     public T removeLast(){
         assert size>0;
+//        System.out.println("size="+size+" head=null?"+(boolean)(head==null)+" tail=null?"+(boolean)(tail==null));
         T res=tail.getValue();
+//        System.out.println("check:"+(int)head.getValue()+" "+(int)tail.getValue());
+
         tail=tail.getPrev();
+        if(tail!=null) {
+            tail.setPrev(null);
+        }
         size--;
         if(size==0){
             head=null;
+            tail=null;
         }
         return res;
     }
