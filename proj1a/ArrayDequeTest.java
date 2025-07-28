@@ -88,6 +88,7 @@ public class ArrayDequeTest {
         myTest1();
         myTest2();
         myTest3();
+        myTest4();
     }
 
     public static void myTest1(){
@@ -129,6 +130,24 @@ public class ArrayDequeTest {
 //		System.out.println("OK now!!");
         passed=passed && ((int) lld1.removeLast()==5);
 //		System.out.println("OK now!!");
+        printTestStatus(passed);
+    }
+    public static void myTest4(){
+        System.out.println("Running myTest4");
+        ArrayDeque lld1=new ArrayDeque();
+        boolean passed=true;
+        lld1.addFirst(0);
+        lld1.addFirst(1);
+        passed=passed&&((int)lld1.size()==2);
+        lld1.addFirst(3);
+        lld1.addFirst(4);
+        lld1.addLast(5);
+        passed=passed&&((int)lld1.size()==5);
+        passed=passed&&((int)lld1.size()==5);
+        lld1.addLast(8);
+        lld1.addFirst(9);
+        lld1.addLast(10);
+        lld1.addLast(11);
         printTestStatus(passed);
     }
 }

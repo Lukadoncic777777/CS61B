@@ -14,7 +14,7 @@ public class ArrayDeque<T> {
         T[] newItems=(T[]) new Object[newSize];
         if(this.head>this.tail){
             System.arraycopy(this.items,this.head,newItems,0,this.nowSize-this.head);
-            System.arraycopy(this.items,0,this.tail,this.nowSize-this.head,this.tail);
+            System.arraycopy(this.items,0,newItems,this.nowSize-this.head,this.tail);
         } else {
             System.arraycopy(this.items,this.head,newItems,0,this.size);
         }
@@ -112,7 +112,7 @@ public class ArrayDeque<T> {
         return items[now];
     }
 
-    public T doGetRecursive(int now,int index){
+    private T doGetRecursive(int now,int index){
         if(index==0){
             return items[now];
         }
