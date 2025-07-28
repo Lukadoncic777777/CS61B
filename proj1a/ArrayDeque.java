@@ -81,7 +81,7 @@ public class ArrayDeque<T> {
         if(size==0){
             tail=head;
         }
-        if(size*3.5<=nowSize && nowSize>=16){
+        if(size*3.5<=nowSize && nowSize>=32){
             resize(nowSize/2);
         }
         return res;
@@ -97,7 +97,7 @@ public class ArrayDeque<T> {
         if(size==0){
             head=tail;
         }
-        if(size*3.5<=nowSize && nowSize>=16) {
+        if(size*3.5<=nowSize && nowSize>=32) {
             resize(nowSize/2);
         }
         return res;
