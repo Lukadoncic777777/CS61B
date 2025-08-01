@@ -12,9 +12,10 @@ public class ArrayDeque<T> {
 
     private void resize(int newSize){
         T[] newItems=(T[]) new Object[newSize];
+//        System.out.println("check! head="+head+" tail="+tail);
         if(this.head>this.tail){
             System.arraycopy(this.items,this.head,newItems,0,this.nowSize-this.head);
-            System.arraycopy(this.items,0,newItems,this.nowSize-this.head,this.tail);
+            System.arraycopy(this.items,0,newItems,this.nowSize-this.head,this.tail+1);
         } else {
             System.arraycopy(this.items,this.head,newItems,0,this.size);
         }
@@ -31,7 +32,7 @@ public class ArrayDeque<T> {
         return (index+1)%nowSize;
     }
     public void addFirst(T item){
-        if(size==nowSize) {
+        if(size==nowSize-1) {
             this.resize(nowSize*2);
         }
         if(size==0) {
@@ -44,7 +45,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item){
-        if(size==nowSize) {
+        if(size==nowSize-1) {
             this.resize(nowSize*2);
         }
         if(size==0) {
@@ -66,7 +67,7 @@ public class ArrayDeque<T> {
 
     public void printDeque(){
         for(int i=head;i!=tail;i=getNext(i)){
-            System.out.print(items[i]);
+            System.out.print(items[i]+" ");
         }
         System.out.println(items[tail]);
     }
@@ -88,6 +89,11 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast(){
+//        System.out.println(nowSize+" "+size+" "+head+" "+tail);
+//        for(T item:items){
+//            System.out.print(item+" ");
+//        }
+//        System.out.println("");
         if(size==0){
             return null;
         }

@@ -137,17 +137,25 @@ public class ArrayDequeTest {
         ArrayDeque lld1=new ArrayDeque();
         boolean passed=true;
         lld1.addFirst(0);
+        lld1.printDeque();
         lld1.addFirst(1);
+        lld1.printDeque();
         passed=passed&&((int)lld1.size()==2);
         lld1.addFirst(3);
+        lld1.printDeque();
         lld1.addFirst(4);
-        lld1.addLast(5);
-        passed=passed&&((int)lld1.size()==5);
-        passed=passed&&((int)lld1.size()==5);
-        lld1.addLast(8);
+        lld1.printDeque();
+        lld1.addFirst(5);
+        lld1.printDeque();
+        lld1.addFirst(8);
+        lld1.printDeque();
         lld1.addFirst(9);
-        lld1.addLast(10);
-        lld1.addLast(11);
+        lld1.printDeque();
+        lld1.addFirst(10);
+        lld1.printDeque();
+        lld1.addFirst(11);
+        lld1.printDeque();
+        passed=passed&&((int)lld1.removeLast()==0);
         printTestStatus(passed);
     }
 }
